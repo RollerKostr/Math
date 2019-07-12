@@ -1,15 +1,14 @@
 using System;
 using FluentAssertions;
+using RollerKostr.Utils.Math.Implementations;
 using Xunit;
 
-namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
+namespace RollerKostr.Utils.Math.Tests.Implementations.IntegerGcdCalculatorTests
 {
-    public class BinaryGcdTests
+    public class BinaryIntegerGcdCalculatorTests
     {
         [Theory]
         [InlineData(-1,  0)]
-        [InlineData( 0, -1)]
-        [InlineData( 1, -1)]
         [InlineData(-1,  1)]
         [InlineData(-1, -1)]
         public void Gcd_IfAnyArgumentIsNegative_ShouldThrowArgumentException(int a, int b)
@@ -17,7 +16,7 @@ namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
             // Arrange
 
             // Act
-            Action action = () => _ = GcdCalculator.Gcd(a, b);
+            Action action = () => _ = IntegerGcdCalculator.Gcd(a, b);
 
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -26,7 +25,6 @@ namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
         [Theory]
         [InlineData( 0,  0, 0)]
         [InlineData( 0,  1, 1)]
-        [InlineData( 1,  0, 1)]
         [InlineData( 1,  1, 1)]
         [InlineData( 1,  2, 1)]
         [InlineData( 2,  3, 1)]
@@ -39,7 +37,7 @@ namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
             // Arrange
             
             // Act
-            var gcd = GcdCalculator.Gcd(a, b);
+            var gcd = IntegerGcdCalculator.Gcd(a, b);
 
             // Assert
             gcd.Should().Be(expectedGcd);
@@ -47,7 +45,6 @@ namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
 
         [Theory]
         [InlineData( 0,  1)]
-        [InlineData( 1,  0)]
         [InlineData( 1,  1)]
         [InlineData( 1,  2)]
         [InlineData( 2,  3)]
@@ -61,7 +58,7 @@ namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
             // Arrange
 
             // Act
-            var gcd = GcdCalculator.Gcd(a, b);
+            var gcd = IntegerGcdCalculator.Gcd(a, b);
 
             // Assert
             var remainderA = a % gcd; 
@@ -72,7 +69,6 @@ namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
 
         [Theory]
         [InlineData( 0,  1)]
-        [InlineData( 1,  0)]
         [InlineData( 1,  1)]
         [InlineData( 1,  2)]
         [InlineData( 2,  3)]
@@ -86,13 +82,33 @@ namespace RollerKostr.Utils.Math.Tests.GcdCalculatorTests
             // Arrange
             
             // Act
-            var gcd = GcdCalculator.Gcd(a, b);
+            var gcd = IntegerGcdCalculator.Gcd(a, b);
 
             // Assert
             var quotientA = a / gcd;
             var quotientB = b / gcd;
-            var quotientsGcd = GcdCalculator.Gcd(quotientA, quotientB);
+            var quotientsGcd = IntegerGcdCalculator.Gcd(quotientA, quotientB);
             quotientsGcd.Should().Be(1);
+        }
+        
+        [Theory]
+        [InlineData( 0,  1)]
+        [InlineData( 1,  2)]
+        [InlineData( 2,  3)]
+        [InlineData( 3,  5)]
+        [InlineData( 6, 12)]
+        [InlineData(12, 30)]
+        // TODO[mk] add random data generation + output logging
+        public void Gcd_ShouldBeCommutative(int a, int b)
+        {
+            // Arrange
+            
+            // Act
+            var gcdDirect = IntegerGcdCalculator.Gcd(a, b);
+            var gcdInverse = IntegerGcdCalculator.Gcd(b, a);
+
+            // Assert
+            gcdDirect.Should().Be(gcdInverse);
         }
     }
 }

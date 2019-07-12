@@ -17,4 +17,8 @@
       <ProjectReference Include="..\..\src\RollerKostr.Utils.Math\RollerKostr.Utils.Math.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Implementations" />
+    </ItemGroup>
+
 </Project>
