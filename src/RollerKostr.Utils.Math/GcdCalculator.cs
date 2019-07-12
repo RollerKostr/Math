@@ -1,6 +1,7 @@
 using System;
 using RollerKostr.Utils.Math.Implementations;
 
+// TODO[mk] change to RollerKostr.Math.GCD
 namespace RollerKostr.Utils.Math
 {
     public static class GcdCalculator
