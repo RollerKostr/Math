@@ -27,7 +27,7 @@ namespace RollerKostr.Utils.Math
         /// of two non-negative real numbers with specified tolerance.
         /// </summary>
         /// <param name="tolerancePercent">Allowed tolerance to find AGCD.</param>
-        public static double Agcd(double tolerancePercent, double a, double b) =>
+        public static decimal Agcd(decimal tolerancePercent, decimal a, decimal b) =>
             ApproximateGcdCalculator.Agcd(tolerancePercent, a, b);
     }
 }

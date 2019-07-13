@@ -1,4 +1,5 @@
 using FluentAssertions;
+using RollerKostr.Utils.Math.Implementations;
 using Xunit;
 
 namespace RollerKostr.Utils.Math.Tests.Implementations.IntegerGcdCalculatorTests
@@ -23,7 +24,7 @@ namespace RollerKostr.Utils.Math.Tests.Implementations.IntegerGcdCalculatorTests
             // Arrange
             
             // Act
-            var gcd = GcdCalculator.Gcd(arguments);
+            var gcd = IntegerGcdCalculator.Gcd(arguments);
 
             // Assert
             gcd.Should().Be(expectedGcd);
